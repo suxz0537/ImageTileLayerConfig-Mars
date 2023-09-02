@@ -228,8 +228,13 @@ def extract_abstract():
     abstract_start = text.find("Abstract:")
     purpose_end = text.find("Purpose:")
 
+    #metadata文件错误返回NaN
     if abstract_start == -1 or purpose_end == -1:
-        return "未找到相关内容"
+        print('metadata文件中未找到相关内容')
+        abstract = 'NaN'
+        abstract_cn =  'NaN'
+        wmts_endpoint = 'https://trek.nasa.gov/tiles/' + planet + '/' +  service + '/' + pic_name
+        return abstract, abstract_cn, wmts_endpoint
 
     abstract = text[abstract_start + len("Abstract:"):purpose_end].strip()
     abstract_cn = translate_text(abstract)
